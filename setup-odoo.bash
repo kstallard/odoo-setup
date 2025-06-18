@@ -36,9 +36,6 @@ echo "Copy this public key to your Github account and then press Enter"
 read
 echo "Continuing..."
 
-mount /dev/cdrom /mnt
-/mnt/Linux/install.sh -d centos -m9 -n
-
 sudo -u $real_user  wget https://dl.fedoraproject.org/pub/epel/9/Everything/x86_64/Packages/r/ripgrep-14.1.1-1.el9.x86_64.rpm
 rpm -Uvh ripgrep-14.1.1-1.el9.x86_64.rpm
 
@@ -63,19 +60,20 @@ dnf install -y postgresql-server libpq-devel
 dnf install -y python-devel openldap-devel openldap-compat
 ln -s /usr/lib64/libldap_r-2.4.so.2 /usr/lib64/libldap_r.so
 
-pvcreate /dev/xvdb
-vgcreate vg-odoo-data /dev/xvdb
-lvcreate -L 499.99GB -n lv-odoo-data vg-odoo-data
-mkfs.xfs /dev/vg-odoo-data/lv-odoo-data
+#Uncomment this if you have another volume on which you want to install odoo
+#pvcreate /dev/xvdb
+#vgcreate vg-odoo-data /dev/xvdb
+#lvcreate -L 499.99GB -n lv-odoo-data vg-odoo-data
+#mkfs.xfs /dev/vg-odoo-data/lv-odoo-data
 
 # label the volume
-xfs_admin -L odoo-data /dev/vg-odoo-data/lv-odoo-data
+# xfs_admin -L odoo-data /dev/vg-odoo-data/lv-odoo-data
 
-fs_uuid=$(blkid -s UUID -o value /dev/vg-odoo-data/lv-odoo-data)
+#fs_uuid=$(blkid -s UUID -o value /dev/vg-odoo-data/lv-odoo-data)
 
-printf "UUID=$fs_uuid /odoo-data      xfs    defaults   0 0\n" >> /etc/fstab
+#printf "UUID=$fs_uuid /odoo-data      xfs    defaults   0 0\n" >> /etc/fstab
 mkdir /odoo-data
-mount /odoo-data
+#mount /odoo-data
 
 #Create the directories for postgres SQL 
 mkdir /odoo-data/postgres
@@ -125,7 +123,7 @@ echo "Installing Python Odoo dependencies"
 
 su - odoo bash -c "source ~/odoo-server/odoo_venv/bin/activate && pip install setuptools wheel && pip install -r ~/odoo-server/odoo-community/requirements.txt"
 
-pip install rlpycairo
+pip3 install rlpycairo
 pip3 install pdfminer.six
 
 sudo dnf install -y https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox-0.12.6.1-2.almalinux9.x86_64.rpm

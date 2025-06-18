@@ -24,20 +24,6 @@ HOSTNAME=$(hostname)
 
 echo "Hostname $HOSTNAME"
 
-if ! [ $(id -u) = 0 ]; then
-   echo "The script need to be run as root." >&2
-   exit 1
-fi
-
-if [ $SUDO_USER ]; then
-    real_user=$SUDO_USER
-else
-    real_user=$(whoami)
-fi
-
-script_path=$(dirname $(realpath "$0"))
-echo "Script path: $script_path"
-
 if [ ! -d ".ssh" ]; then
    echo "Creating public/private key pair for odoo-enterprise access...."
    sudo -u $real_user mkdir .ssh

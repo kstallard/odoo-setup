@@ -27,7 +27,7 @@ These files are to instantiate a new odoo server.
 
 This assumes Cent OS 10 (CentOS Stream release 10 (Coughlan)).  But you can use AlmaLinux as well.  Come to think if it, anything RedHat might work.  But this has been exensively tested on Cent OS 10. If using something else, you miliage may vary.
 
-## Install Instructions
+## Pre-Install Instructions
 After you install the OS of choice (keep in mind this uses `dnf` (rpm packages, Fedora) insted of `apt` (deb packages, Debian) ), and you get networking configured properly, you'll need to also install core development tools (gcc, ld, make, etc)
 
 `sudo dnf update`
@@ -37,7 +37,7 @@ You'll also need 'git'
 
 `sudo dnf install git`
 
-# If you have ssh keys for git hub, update them
+## If you have ssh keys for git hub, update them
 - `mkdir .ssh`
 - `chmod 700 .ssh`
 - `vim .ssh/odoo_enterprise`
@@ -47,14 +47,14 @@ You'll also need 'git'
 
 -- Note: If you don't have ssh keys, the setup script will create them and provide you with an opportunity to update your github account with the new key
 
-### TLS/SSL
+## TLS/SSL
 You also need to have a public key, certificate chain of trust and a private key for ssl in the same directory as this script.  The script will copy it to a subfoler `/etc/letsencrypt`.  If you want to change that location, you'll need to update the script, make sure you find all of the directory locations (one is in the config file as well).
 
 The public key plus the certificate chain of trust needs to be named `fullchain.pem`, and the private key file needs to be named `privkey.pem`.
 
 I have only tested this on my system, again, there may be small variances that you'll need to accomodate for in whatever context this is run.
  
-### Start Odoo Install
+## Install Odoo
 
 Before running the script, you'll need to edit it.  Search for `;admin_password`
 
@@ -62,10 +62,13 @@ You'll need to select a password that you will use when first accessing Odoo and
 
 One final note before you run this.  There isn't a lot of error detection in the script.  So if something fails, there is the likelihood that it will continue to run.  In most cases, after you correct the issue, you can just rerun the script.  In the unlikly case this won't work, before you run the script, take a snapshot of your VM (if not using Docker) before you run it so you can pick up where you left off.
 
-## Install Odoo
+### Run the installer
 `sudo setup-odoo.bash`
 
 Once the install starts, it will display some basic information including the public key you need to associate with your github account. It will then pause and wait for a key press.  This is assuming you've associated your git hub account with Odoo Enterprise repositoy.  If you haven't done so you'll need to do this first or remove Odoo Enterprise related operations from this script.
+
+## Post Install Instructions
+A few things need to be done after the install completes
 
 ### Load the database
 Load you newly installed instance into your browser by going to the ip address you just setup.
@@ -116,4 +119,5 @@ select id, login, password from res_users;
 You should now be able to loginto your newly migrated database.  For the other users, they will need to request a password reset.  Make sure you have your odoo on-premise instance integrated with incomming and outgoing mail servers so that password reset instructions can be delivered to your users.
 
 
+Please feel free to submit suggestions or improvements.  I hope this helps you along in getting out of the cloud.
 

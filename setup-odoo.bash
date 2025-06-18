@@ -16,7 +16,7 @@ echo "Script path: $script_path"
 
 # ref: https://askubuntu.com/a/30157/8698
 if [ -z $ODOO_HOSTNAME ]; then
-    ODOO_HOSTNAME=odoo-staging.arilabs.net
+    ODOO_HOSTNAME=odoo-staging.mycompany.com
 fi
 
 hostnamectl set-hostname $ODOO_HOSTNAME

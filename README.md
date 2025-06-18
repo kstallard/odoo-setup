@@ -83,19 +83,19 @@ If you are migrating from Odoo online, the hash algorithm for passwords is diffe
 
 After you log into the Odoo server (ssh), do the following:
 
-`sudo bash`
+`sudo bash`  
 (enter your password)
 
-`sudo - odoo`
-`cd` 
-`cd odoo-server`
-`source ./odoo_venv/bin/activate`
+`sudo - odoo`  
+`cd`  
+`cd odoo-server`  
+`source ./odoo_venv/bin/activate`  
 
-`python`
-`>>> from passlib.hash import pbkdf2_sha512`
-`>>> password = "<mynewpassword>"`
-`>>> hash = pbkdf2_sha512.hash(password)`
-`>>> print(hash)`
+`python`  
+`>>> from passlib.hash import pbkdf2_sha512`  
+`>>> password = "<mynewpassword>"`  
+`>>> hash = pbkdf2_sha512.hash(password)`  
+`>>> print(hash)`  
 
 <prints the hash for the password you assigned to the variable `password`>
 

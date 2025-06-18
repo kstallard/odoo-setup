@@ -104,14 +104,14 @@ After you log into the Odoo server (ssh), do the following:
 
 `exit`  (takes you back to the root bash instance)
 
-su - postgres 
-psql 
+`su - postgres`  
+`psql`  
 
-select id, login, password from res_users;
+`select id, login, password from res_users;`  
 
 (this will list all of the users)
 
-`update res_users set password = '<copy/past the hash value here>' where login='<the username you want to update>';`
+`update res_users set password = '<copy/past the hash value here>' where login='<the username you want to update>';`  
 
 (change the string for login to the user you want to upate, copy and past the hash to the string being set for password.  Don't forget the semi colin at the end)
 

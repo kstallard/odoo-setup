@@ -21,12 +21,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-# Introduction
+## Introduction
 
 These files are to instantiate a new odoo server.
 
 This assumes Cent OS 10 (CentOS Stream release 10 (Coughlan)).  But you can use AlmaLinux as well.  Come to think if it, anything RedHat might work.  But this has been exensively tested on Cent OS 10. If using something else, you miliage may vary.
 
+## Install Instructions
 After you install the OS of choice (keep in mind this uses `dnf` (rpm packages, Fedora) insted of `apt` (deb packages, Debian) ), and you get networking configured properly, you'll need to also install core development tools (gcc, ld, make, etc)
 
 `sudo dnf update`
@@ -36,7 +37,7 @@ You'll also need 'git'
 
 `sudo dnf install git`
 
-### If you have ssh keys for git hub, update them
+# If you have ssh keys for git hub, update them
 - `mkdir .ssh`
 - `chmod 700 .ssh`
 - `vim .ssh/odoo_enterprise`
